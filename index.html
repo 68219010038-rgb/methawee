@@ -40,13 +40,27 @@
       transition: transform 0.2s, background 0.2s;
     }
     .btn:hover { background: #5a67d8; transform: translateY(-2px); }
+    .btn:active { transform: scale(0.95); }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>สวัสดีครับ</h1>
-    <p>นี่คือตัวอย่างการตกแต่งหน้าเว็บด้วย CSS</p>
-    <button class="btn">กดตรงนี้</button>
+    <h1 id="title">สวัสดีครับ</h1>
+    <p id="message">นี่คือตัวอย่างการตกแต่งหน้าเว็บด้วย CSS</p>
+    <button class="btn" id="myBtn">กดตรงนี้</button>
   </div>
+
+  <script>
+    const btn = document.getElementById("myBtn");
+    const title = document.getElementById("title");
+    const message = document.getElementById("message");
+    let count = 0;
+
+    btn.addEventListener("click", function () {
+      count++;
+      title.textContent = "คุณกดแล้ว!";
+      message.textContent = "กดไปแล้ว " + count + " ครั้ง";
+    });
+  </script>
 </body>
 </html>
