@@ -1,66 +1,178 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>หน้าเว็บของฉัน</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ประวัติส่วนตัว | เมธาวี ลาภบุญ</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b1020; --card:#131a33; --card2:#1a2344; --text:#e8ecff; --muted:#9aa6d6;
+    --accent:#4cc9f0; --accent2:#7b61ff; --accent3:#ff5d8f; --line:rgba(255,255,255,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Kanit',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;
+    background-image:radial-gradient(circle at 15% 10%,rgba(123,97,255,.22),transparent 40%),
+                     radial-gradient(circle at 85% 30%,rgba(76,201,240,.16),transparent 40%);
+    background-attachment:fixed}
+  a{color:inherit;text-decoration:none}
 
-    body {
-      font-family: "Sarabun", "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #333;
-    }
+  nav{position:sticky;top:0;z-index:10;display:flex;justify-content:center;gap:6px;flex-wrap:wrap;
+    padding:12px;background:rgba(11,16,32,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav a{padding:6px 16px;border-radius:999px;color:var(--muted);font-size:.95rem;transition:.2s}
+  nav a:hover{background:var(--card2);color:var(--accent)}
 
-    .card {
-      background: #fff;
-      padding: 32px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      max-width: 400px;
-      text-align: center;
-    }
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px}
 
-    .card h1 { color: #764ba2; margin-bottom: 12px; }
-    .card p  { line-height: 1.6; margin-bottom: 20px; }
+  header.hero{padding:70px 0 50px;display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center}
+  .avatar{width:180px;height:180px;border-radius:50%;display:grid;place-items:center;
+    font-size:4.2rem;font-weight:600;color:#fff;
+    background:linear-gradient(135deg,var(--accent2),var(--accent));
+    box-shadow:0 0 0 6px rgba(76,201,240,.15),0 20px 50px rgba(123,97,255,.35)}
+  .hero small{color:var(--accent);letter-spacing:.15em;font-size:.85rem}
+  .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:600;line-height:1.2;margin:6px 0 10px}
+  .hero h1 span{background:linear-gradient(90deg,var(--accent),var(--accent3));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--muted);max-width:520px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .tag{padding:4px 14px;border-radius:999px;background:var(--card2);border:1px solid var(--line);font-size:.85rem}
 
-    .btn {
-      background: #667eea;
-      color: #fff;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
-    }
-    .btn:hover { background: #5a67d8; transform: translateY(-2px); }
-    .btn:active { transform: scale(0.95); }
-  </style>
+  section{padding:36px 0}
+  h2{font-size:1.6rem;font-weight:500;margin-bottom:22px;display:flex;align-items:center;gap:12px}
+  h2::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;transition:.25s}
+  .card:hover{transform:translateY(-4px);border-color:rgba(76,201,240,.4)}
+  .card .ic{font-size:1.8rem}
+  .card .lb{color:var(--muted);font-size:.85rem;margin-top:6px}
+  .card .vl{font-size:1.2rem;font-weight:500}
+
+  .bars{display:grid;gap:16px}
+  .bar .top{display:flex;justify-content:space-between;font-size:.95rem;margin-bottom:6px}
+  .track{height:10px;background:var(--card2);border-radius:99px;overflow:hidden}
+  .fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width 1.4s ease}
+
+  .timeline{position:relative;margin-left:14px;padding-left:28px;border-left:2px solid var(--line)}
+  .tl{position:relative;margin-bottom:24px}
+  .tl::before{content:"";position:absolute;left:-37px;top:8px;width:14px;height:14px;border-radius:50%;
+    background:var(--accent);box-shadow:0 0 0 5px rgba(76,201,240,.2)}
+  .tl.now::before{background:var(--accent3);box-shadow:0 0 0 5px rgba(255,93,143,.25)}
+  .tl h3{font-weight:500;font-size:1.1rem}
+  .tl p{color:var(--muted);font-size:.95rem}
+
+  .hobby{text-align:center}
+  .hobby .ic{font-size:2.4rem;display:block;margin-bottom:6px}
+
+  footer{text-align:center;color:var(--muted);padding:40px 0 50px;font-size:.9rem;border-top:1px solid var(--line);margin-top:30px}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:.7s}
+  .reveal.show{opacity:1;transform:none}
+
+  @media(max-width:640px){
+    header.hero{grid-template-columns:1fr;text-align:center;justify-items:center;padding-top:40px}
+    .tags{justify-content:center}
+    .avatar{width:140px;height:140px;font-size:3.2rem}
+  }
+</style>
 </head>
 <body>
-  <div class="card">
-    <h1 id="title">สวัสดีครับ</h1>
-    <p id="message">นี่คือตัวอย่างการตกแต่งหน้าเว็บด้วย CSS</p>
-    <button class="btn" id="myBtn">กดตรงนี้</button>
-  </div>
 
-  <script>
-    const btn = document.getElementById("myBtn");
-    const title = document.getElementById("title");
-    const message = document.getElementById("message");
-    let count = 0;
+<nav>
+  <a href="#home">หน้าแรก</a>
+  <a href="#about">ข้อมูลส่วนตัว</a>
+  <a href="#edu">การศึกษา</a>
+  <a href="#skill">ความสามารถ</a>
+  <a href="#hobby">งานอดิเรก</a>
+</nav>
 
-    btn.addEventListener("click", function () {
-      count++;
-      title.textContent = "คุณกดแล้ว!";
-      message.textContent = "กดไปแล้ว " + count + " ครั้ง";
+<div class="wrap">
+
+  <header class="hero" id="home">
+    <div class="avatar">ม</div>
+    <div>
+      <small>PERSONAL PROFILE</small>
+      <h1>สวัสดีครับ ผมชื่อ <span>เมธาวี ลาภบุญ</span></h1>
+      <p>นักเรียนวิทยาลัยเทคนิคสิงห์บุรี ชอบเล่นเกม ตีแบด ฟังเพลง และสนใจอุปกรณ์ไอที</p>
+      <div class="tags">
+        <span class="tag">🎮 Gamer</span>
+        <span class="tag">🏸 Badminton</span>
+        <span class="tag">🎧 Music</span>
+        <span class="tag">💻 IT Gadgets</span>
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="reveal">
+    <h2>👤 ข้อมูลส่วนตัว</h2>
+    <div class="grid">
+      <div class="card"><div class="ic">🪪</div><div class="lb">ชื่อ - นามสกุล</div><div class="vl">เมธาวี ลาภบุญ</div></div>
+      <div class="card"><div class="ic">🎂</div><div class="lb">วันเกิด</div><div class="vl">17 ธันวาคม 2546</div></div>
+      <div class="card"><div class="ic">⏳</div><div class="lb">อายุ</div><div class="vl" id="age">-</div></div>
+      <div class="card"><div class="ic">📏</div><div class="lb">ส่วนสูง</div><div class="vl">170 ซม.</div></div>
+      <div class="card"><div class="ic">⚖️</div><div class="lb">น้ำหนัก</div><div class="vl">60 กก.</div></div>
+    </div>
+  </section>
+
+  <section id="edu" class="reveal">
+    <h2>🎓 ประวัติการศึกษา</h2>
+    <div class="timeline">
+      <div class="tl">
+        <h3>ระดับประถมศึกษา – มัธยมศึกษาตอนต้น</h3>
+        <p>โรงเรียนท่าข้าม</p>
+      </div>
+      <div class="tl now">
+        <h3>ปัจจุบัน</h3>
+        <p>วิทยาลัยเทคนิคสิงห์บุรี</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skill" class="reveal">
+    <h2>⚡ ความสามารถพิเศษ</h2>
+    <div class="card" style="margin-bottom:22px">
+      <div class="ic">🌙</div>
+      <div class="vl">เล่นเกมข้ามวันข้ามคืนได้</div>
+      <div class="lb">มีความอึดและสมาธิในการเล่นเกมต่อเนื่องยาว ๆ</div>
+    </div>
+    <div class="bars">
+      <div class="bar"><div class="top"><span>🎮 การเล่นเกม</span><span>95%</span></div><div class="track"><div class="fill" data-w="95"></div></div></div>
+      <div class="bar"><div class="top"><span>🏸 ตีแบด</span><span>80%</span></div><div class="track"><div class="fill" data-w="80"></div></div></div>
+      <div class="bar"><div class="top"><span>💻 ความรู้ด้านอุปกรณ์ไอที</span><span>85%</span></div><div class="track"><div class="fill" data-w="85"></div></div></div>
+    </div>
+  </section>
+
+  <section id="hobby" class="reveal">
+    <h2>❤️ สิ่งที่ชอบ</h2>
+    <div class="grid">
+      <div class="card hobby"><span class="ic">🏸</span><div class="vl">ตีแบดมินตัน</div><div class="lb">ออกกำลังกายและสนุกกับเพื่อน ๆ</div></div>
+      <div class="card hobby"><span class="ic">🎧</span><div class="vl">ฟังเพลง</div><div class="lb">ฟังได้ทุกเวลา ทุกอารมณ์</div></div>
+      <div class="card hobby"><span class="ic">🖱️</span><div class="vl">อุปกรณ์ไอที</div><div class="lb">คอม เมาส์ คีย์บอร์ด หูฟัง และแก็ดเจ็ต</div></div>
+    </div>
+  </section>
+
+  <footer>© 2026 เมธาวี ลาภบุญ · วิทยาลัยเทคนิคสิงห์บุรี</footer>
+</div>
+
+<script>
+  // คำนวณอายุอัตโนมัติ
+  (function(){
+    const b = new Date(2003, 11, 17), n = new Date();
+    let a = n.getFullYear() - b.getFullYear();
+    if (n < new Date(n.getFullYear(), 11, 17)) a--;
+    document.getElementById('age').textContent = a + ' ปี';
+  })();
+
+  // เอฟเฟกต์เลื่อนแล้วเด้งขึ้นมา + แถบความสามารถ
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('show');
+        e.target.querySelectorAll('.fill').forEach(f => f.style.width = f.dataset.w + '%');
+      }
     });
-  </script>
+  }, {threshold: .2});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
 </body>
 </html>
